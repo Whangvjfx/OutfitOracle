@@ -8,14 +8,25 @@ public enum ThermalPreference: String, Codable, CaseIterable, Identifiable, Send
 
     public var id: String { rawValue }
 
-    /// 对体感温度的算法补偿偏移量（°C）
-    /// 怕冷者：体感温度向下修正，使其触发更厚的衣物档位
-    /// 怕热者：体感温度向上修正，使其触发更凉快的衣物档位
     public var temperatureOffset: Double {
         switch self {
         case .chillsEasily: return -2.5
         case .neutral: return 0.0
         case .sweatsEasily: return 2.5
         }
+    }
+}
+
+/// 综合用户偏好配置
+public struct UserProfilePreference: Codable, Sendable {
+    public var thermalPreference: ThermalPreference
+    public var genderPreference: GenderCategory
+
+    public init(
+        thermalPreference: ThermalPreference = .neutral,
+        genderPreference: GenderCategory = .men
+    ) {
+        self.thermalPreference = thermalPreference
+        self.genderPreference = genderPreference
     }
 }

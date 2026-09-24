@@ -14,6 +14,7 @@ public final class RecommendationTestViewModel {
     
     // 用户偏好与随机轮换种子
     public var preference: ThermalPreference = .neutral
+    public var gender: GenderCategory = .men
     public var shuffleSeed: Int = 0
 
     // 计算结果
@@ -45,6 +46,7 @@ public final class RecommendationTestViewModel {
         self.currentPlan = engine.generateOutfit(
             for: simulatedWeather,
             preference: preference,
+            gender: gender,
             wardrobe: wardrobeItems,
             shuffleSeed: shuffleSeed
         )

@@ -1,30 +1,91 @@
 import Foundation
 
-/// 系统预置的基础衣橱单品库（覆盖四季与各类天气场景）
+/// 预置海量四季与男女专属衣橱单品库（60+ 精品款式，特别针对哈尔滨极寒与全国四季）
 public struct WardrobeDefaults {
     public static let initialItems: [ClothingItem] = [
-        // --- 贴身内搭 (Inner) ---
+        // ==========================================
+        // 1. 贴身内搭 (Inner) - 共 16 款
+        // ==========================================
+        // --- 极寒/寒冷保暖打底 ---
         ClothingItem(
-            name: "加厚发热保暖内衣",
+            name: "德绒加厚双面发热内衣",
             category: .inner,
-            minApparentTemp: -30.0,
-            maxApparentTemp: 5.0,
+            gender: .unisex,
+            visualStyle: "thermal",
+            colorHex: "#374151",
+            minApparentTemp: -40.0,
+            maxApparentTemp: 3.0,
             iconName: "flame.fill",
             warmthScore: 5,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "长袖纯棉打底衫",
+            name: "美利奴羊毛高领打底衫",
             category: .inner,
+            gender: .women,
+            visualStyle: "thermal",
+            colorHex: "#F3F4F6",
+            minApparentTemp: -25.0,
+            maxApparentTemp: 6.0,
+            iconName: "tshirt.fill",
+            warmthScore: 5,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "重磅磨毛长袖打底T恤",
+            category: .inner,
+            gender: .men,
+            visualStyle: "thermal",
+            colorHex: "#111827",
+            minApparentTemp: -5.0,
+            maxApparentTemp: 12.0,
+            iconName: "tshirt.fill",
+            warmthScore: 4,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "经典白圆领纯棉打底长袖",
+            category: .inner,
+            gender: .unisex,
+            visualStyle: "tshirt",
+            colorHex: "#FFFFFF",
             minApparentTemp: 5.0,
             maxApparentTemp: 18.0,
             iconName: "tshirt.fill",
             warmthScore: 3,
             isDefaultItem: true
         ),
+        // --- 衬衫类 ---
         ClothingItem(
-            name: "牛津纺长袖衬衫",
+            name: "牛津纺经典纯白长袖衬衫",
             category: .inner,
+            gender: .men,
+            visualStyle: "shirt",
+            colorHex: "#F9FAFB",
+            minApparentTemp: 12.0,
+            maxApparentTemp: 23.0,
+            iconName: "briefcase.fill",
+            warmthScore: 2,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "法式复古飘带长袖雪纺衬衫",
+            category: .inner,
+            gender: .women,
+            visualStyle: "shirt",
+            colorHex: "#EDE9FE",
+            minApparentTemp: 14.0,
+            maxApparentTemp: 25.0,
+            iconName: "sparkles",
+            warmthScore: 2,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "蓝色条纹休闲廓形衬衫",
+            category: .inner,
+            gender: .unisex,
+            visualStyle: "shirt",
+            colorHex: "#60A5FA",
             minApparentTemp: 15.0,
             maxApparentTemp: 24.0,
             iconName: "briefcase.fill",
@@ -32,59 +93,203 @@ public struct WardrobeDefaults {
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "基础纯棉短袖T恤",
+            name: "日系水洗牛仔短袖衬衫",
             category: .inner,
+            gender: .men,
+            visualStyle: "shirt",
+            colorHex: "#3B82F6",
             minApparentTemp: 18.0,
-            maxApparentTemp: 45.0,
+            maxApparentTemp: 28.0,
+            iconName: "tshirt",
+            warmthScore: 2,
+            isDefaultItem: true
+        ),
+        // --- 短袖T恤与背心 ---
+        ClothingItem(
+            name: "重磅纯棉正肩白色短袖T恤",
+            category: .inner,
+            gender: .unisex,
+            visualStyle: "tshirt",
+            colorHex: "#FFFFFF",
+            minApparentTemp: 18.0,
+            maxApparentTemp: 35.0,
             iconName: "tshirt",
             warmthScore: 1,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "速干透气无袖背心",
+            name: "复古黑色宽松印花短袖T恤",
             category: .inner,
+            gender: .men,
+            visualStyle: "tshirt",
+            colorHex: "#18181B",
+            minApparentTemp: 19.0,
+            maxApparentTemp: 36.0,
+            iconName: "tshirt",
+            warmthScore: 1,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "法式法兰绒修身短袖针织衫",
+            category: .inner,
+            gender: .women,
+            visualStyle: "tshirt",
+            colorHex: "#FDE68A",
+            minApparentTemp: 18.0,
+            maxApparentTemp: 29.0,
+            iconName: "tshirt",
+            warmthScore: 2,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "冰丝凉感浅灰短袖T恤",
+            category: .inner,
+            gender: .unisex,
+            visualStyle: "tshirt",
+            colorHex: "#E5E7EB",
+            minApparentTemp: 24.0,
+            maxApparentTemp: 42.0,
+            iconName: "snowflake",
+            warmthScore: 1,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "美式纯色螺纹无袖工装背心",
+            category: .inner,
+            gender: .men,
+            visualStyle: "tshirt",
+            colorHex: "#4B5563",
             minApparentTemp: 28.0,
-            maxApparentTemp: 48.0,
+            maxApparentTemp: 45.0,
+            iconName: "sun.max.fill",
+            warmthScore: 1,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "法式方领吊带针织背心",
+            category: .inner,
+            gender: .women,
+            visualStyle: "tshirt",
+            colorHex: "#FBCFE8",
+            minApparentTemp: 27.0,
+            maxApparentTemp: 45.0,
             iconName: "sun.max.fill",
             warmthScore: 1,
             isDefaultItem: true
         ),
 
-        // --- 保暖中层 (MidLayer) ---
+        // ==========================================
+        // 2. 保暖中层 (MidLayer) - 共 14 款
+        // ==========================================
         ClothingItem(
-            name: "羊毛粗针厚毛衣",
+            name: "粗棒针高领加厚绞花毛衣",
             category: .midLayer,
-            minApparentTemp: -30.0,
-            maxApparentTemp: 8.0,
+            gender: .unisex,
+            visualStyle: "sweater",
+            colorHex: "#FEF3C7",
+            minApparentTemp: -40.0,
+            maxApparentTemp: 5.0,
             iconName: "theatermasks.fill",
             warmthScore: 5,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "抓绒保暖连帽卫衣",
+            name: "软糯马海毛落肩针织毛衣",
             category: .midLayer,
-            minApparentTemp: 0.0,
+            gender: .women,
+            visualStyle: "sweater",
+            colorHex: "#DDD6FE",
+            minApparentTemp: -20.0,
+            maxApparentTemp: 10.0,
+            iconName: "hanger",
+            warmthScore: 4,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "户外摇粒绒保暖半拉链中层",
+            category: .midLayer,
+            gender: .unisex,
+            visualStyle: "sweater",
+            colorHex: "#4D7C0F",
+            minApparentTemp: -15.0,
+            maxApparentTemp: 8.0,
+            iconName: "shield.fill",
+            warmthScore: 4,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "复古水洗重磅连帽卫衣",
+            category: .midLayer,
+            gender: .men,
+            visualStyle: "hoodie",
+            colorHex: "#374151",
+            minApparentTemp: -2.0,
             maxApparentTemp: 16.0,
             iconName: "figure.walk",
             warmthScore: 4,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "轻薄针织开衫",
+            name: "克莱因蓝圆领刺绣卫衣",
             category: .midLayer,
-            minApparentTemp: 14.0,
+            gender: .unisex,
+            visualStyle: "hoodie",
+            colorHex: "#2563EB",
+            minApparentTemp: 2.0,
+            maxApparentTemp: 17.0,
+            iconName: "figure.walk",
+            warmthScore: 3,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "温柔奶杏色羊绒开衫",
+            category: .midLayer,
+            gender: .women,
+            visualStyle: "sweater",
+            colorHex: "#FDF4E3",
+            minApparentTemp: 10.0,
+            maxApparentTemp: 20.0,
+            iconName: "hanger",
+            warmthScore: 3,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "学院风V领撞色毛背心",
+            category: .midLayer,
+            gender: .unisex,
+            visualStyle: "sweater",
+            colorHex: "#1E3A8A",
+            minApparentTemp: 12.0,
             maxApparentTemp: 22.0,
             iconName: "hanger",
             warmthScore: 2,
             isDefaultItem: true
         ),
-
-        // --- 防风防寒外套 (Outer) ---
         ClothingItem(
-            name: "极地防风加厚长款羽绒服",
+            name: "轻薄防晒薄针织空调开衫",
+            category: .midLayer,
+            gender: .women,
+            visualStyle: "sweater",
+            colorHex: "#E0E7FF",
+            minApparentTemp: 18.0,
+            maxApparentTemp: 27.0,
+            iconName: "sun.max",
+            warmthScore: 1,
+            isDefaultItem: true
+        ),
+
+        // ==========================================
+        // 3. 防风外套 (Outer) - 共 16 款
+        // ==========================================
+        // --- 极寒严冬羽绒 (哈尔滨级抗寒) ---
+        ClothingItem(
+            name: "极地抗风暴长款加厚白鹅绒服",
             category: .outer,
-            minApparentTemp: -35.0,
-            maxApparentTemp: 0.0,
+            gender: .unisex,
+            visualStyle: "downJacket",
+            colorHex: "#0F172A",
+            minApparentTemp: -45.0,
+            maxApparentTemp: -5.0,
             iconName: "snowflake",
             warmthScore: 5,
             isWaterproof: true,
@@ -92,29 +297,109 @@ public struct WardrobeDefaults {
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "短款轻便羽绒服",
+            name: "女士收腰保暖中长款连帽羽绒服",
             category: .outer,
-            minApparentTemp: -2.0,
-            maxApparentTemp: 10.0,
+            gender: .women,
+            visualStyle: "downJacket",
+            colorHex: "#E2E8F0",
+            minApparentTemp: -30.0,
+            maxApparentTemp: 2.0,
+            iconName: "snowflake",
+            warmthScore: 5,
+            isWaterproof: true,
+            isWindproof: true,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "短款廓形立领面包羽绒服",
+            category: .outer,
+            gender: .unisex,
+            visualStyle: "downJacket",
+            colorHex: "#64748B",
+            minApparentTemp: -18.0,
+            maxApparentTemp: 6.0,
             iconName: "cloud.snow.fill",
             warmthScore: 4,
             isWindproof: true,
             isDefaultItem: true
         ),
+        // --- 羊毛大衣 ---
         ClothingItem(
-            name: "羊毛毛呢经典大衣",
+            name: "双排扣英伦经典羊毛呢大衣",
             category: .outer,
-            minApparentTemp: 2.0,
-            maxApparentTemp: 13.0,
+            gender: .men,
+            visualStyle: "coat",
+            colorHex: "#1E293B",
+            minApparentTemp: -8.0,
+            maxApparentTemp: 11.0,
             iconName: "star.fill",
             warmthScore: 4,
             isWindproof: true,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "工装防风立领夹克",
+            name: "法式系带水波纹双面呢长款大衣",
             category: .outer,
+            gender: .women,
+            visualStyle: "coat",
+            colorHex: "#D97706",
+            minApparentTemp: -6.0,
+            maxApparentTemp: 12.0,
+            iconName: "star.fill",
+            warmthScore: 4,
+            isWindproof: true,
+            isDefaultItem: true
+        ),
+        // --- 冲锋衣与风衣 ---
+        ClothingItem(
+            name: "三合一可拆卸户外压胶冲锋衣",
+            category: .outer,
+            gender: .unisex,
+            visualStyle: "windbreaker",
+            colorHex: "#047857",
+            minApparentTemp: -10.0,
+            maxApparentTemp: 15.0,
+            iconName: "shield.fill",
+            warmthScore: 4,
+            isWaterproof: true,
+            isWindproof: true,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "英伦经典双排扣防风长风衣",
+            category: .outer,
+            gender: .unisex,
+            visualStyle: "coat",
+            colorHex: "#CA8A04",
+            minApparentTemp: 6.0,
+            maxApparentTemp: 19.0,
+            iconName: "wind",
+            warmthScore: 3,
+            isWaterproof: true,
+            isWindproof: true,
+            isDefaultItem: true
+        ),
+        // --- 夹克与皮衣 ---
+        ClothingItem(
+            name: "复古水洗工装牛仔翻领夹克",
+            category: .outer,
+            gender: .unisex,
+            visualStyle: "jacket",
+            colorHex: "#2563EB",
             minApparentTemp: 10.0,
+            maxApparentTemp: 21.0,
+            iconName: "jacket.fill",
+            warmthScore: 2,
+            isWindproof: true,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "机车风真皮翻领立挺皮夹克",
+            category: .outer,
+            gender: .men,
+            visualStyle: "jacket",
+            colorHex: "#18181B",
+            minApparentTemp: 8.0,
             maxApparentTemp: 18.0,
             iconName: "shield.fill",
             warmthScore: 3,
@@ -122,68 +407,195 @@ public struct WardrobeDefaults {
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "复古水洗牛仔外套",
+            name: "美式复古拼色刺绣棒球服",
             category: .outer,
-            minApparentTemp: 12.0,
-            maxApparentTemp: 20.0,
-            iconName: "jacket.fill",
+            gender: .unisex,
+            visualStyle: "jacket",
+            colorHex: "#1E3A8A",
+            minApparentTemp: 9.0,
+            maxApparentTemp: 19.0,
+            iconName: "sportscourt.fill",
+            warmthScore: 3,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "韩系宽松休闲小西装外套",
+            category: .outer,
+            gender: .women,
+            visualStyle: "jacket",
+            colorHex: "#52525B",
+            minApparentTemp: 14.0,
+            maxApparentTemp: 23.0,
+            iconName: "briefcase.fill",
             warmthScore: 2,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "轻量透气户外风衣",
+            name: "轻薄防泼水户外运动皮肤风衣",
             category: .outer,
-            minApparentTemp: 14.0,
-            maxApparentTemp: 23.0,
+            gender: .unisex,
+            visualStyle: "windbreaker",
+            colorHex: "#06B6D4",
+            minApparentTemp: 17.0,
+            maxApparentTemp: 26.0,
             iconName: "wind",
-            warmthScore: 2,
+            warmthScore: 1,
             isWaterproof: true,
             isWindproof: true,
             isDefaultItem: true
         ),
 
-        // --- 舒适下装 (Bottom) ---
+        // ==========================================
+        // 4. 裤装与下装 (Bottom) - 共 14 款
+        // ==========================================
+        // --- 极寒保暖裤 ---
         ClothingItem(
-            name: "内加厚摇粒绒保暖长裤",
+            name: "内加厚羊羔绒极地防风保暖长裤",
             category: .bottom,
-            minApparentTemp: -30.0,
-            maxApparentTemp: 5.0,
+            gender: .unisex,
+            visualStyle: "pants",
+            colorHex: "#1F2937",
+            minApparentTemp: -40.0,
+            maxApparentTemp: 2.0,
             iconName: "figure.walk",
             warmthScore: 5,
+            isWindproof: true,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "厚磅经典直筒牛仔裤",
+            name: "加厚摇粒绒内衬微弹牛仔长裤",
             category: .bottom,
-            minApparentTemp: 3.0,
-            maxApparentTemp: 22.0,
+            gender: .unisex,
+            visualStyle: "jeans",
+            colorHex: "#1E3A8A",
+            minApparentTemp: -20.0,
+            maxApparentTemp: 8.0,
+            iconName: "figure.walk",
+            warmthScore: 4,
+            isDefaultItem: true
+        ),
+        // --- 常规牛仔与休闲裤 ---
+        ClothingItem(
+            name: "经典复古水洗高腰直筒牛仔裤",
+            category: .bottom,
+            gender: .unisex,
+            visualStyle: "jeans",
+            colorHex: "#2563EB",
+            minApparentTemp: 5.0,
+            maxApparentTemp: 23.0,
             iconName: "figure.walk",
             warmthScore: 3,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "垂坠微弹休闲西裤",
+            name: "多口袋山系战术宽松工装裤",
             category: .bottom,
-            minApparentTemp: 12.0,
-            maxApparentTemp: 26.0,
+            gender: .men,
+            visualStyle: "pants",
+            colorHex: "#365314",
+            minApparentTemp: 8.0,
+            maxApparentTemp: 24.0,
+            iconName: "figure.walk",
+            warmthScore: 3,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "高腰垂感显瘦阔腿西装裤",
+            category: .bottom,
+            gender: .women,
+            visualStyle: "pants",
+            colorHex: "#374151",
+            minApparentTemp: 10.0,
+            maxApparentTemp: 25.0,
             iconName: "figure.stand",
             warmthScore: 2,
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "轻薄透气工装短裤",
+            name: "纯棉重磅束脚宽松休闲运动卫裤",
             category: .bottom,
-            minApparentTemp: 24.0,
+            gender: .unisex,
+            visualStyle: "pants",
+            colorHex: "#4B5563",
+            minApparentTemp: 6.0,
+            maxApparentTemp: 22.0,
+            iconName: "figure.walk",
+            warmthScore: 3,
+            isDefaultItem: true
+        ),
+        // --- 裙装类 (女) ---
+        ClothingItem(
+            name: "加厚羊毛混纺高腰百褶半身长裙",
+            category: .bottom,
+            gender: .women,
+            visualStyle: "skirt",
+            colorHex: "#78350F",
+            minApparentTemp: 0.0,
+            maxApparentTemp: 16.0,
+            iconName: "figure.stand.dress",
+            warmthScore: 4,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "法式复古开叉牛仔A字长裙",
+            category: .bottom,
+            gender: .women,
+            visualStyle: "skirt",
+            colorHex: "#3B82F6",
+            minApparentTemp: 14.0,
+            maxApparentTemp: 26.0,
+            iconName: "figure.stand.dress",
+            warmthScore: 2,
+            isDefaultItem: true
+        ),
+        // --- 夏季短裤与短裙 ---
+        ClothingItem(
+            name: "轻薄速干抽绳多口袋工装短裤",
+            category: .bottom,
+            gender: .men,
+            visualStyle: "shorts",
+            colorHex: "#52525B",
+            minApparentTemp: 23.0,
             maxApparentTemp: 45.0,
             iconName: "sun.haze.fill",
             warmthScore: 1,
             isDefaultItem: true
         ),
-
-        // --- 配件 (Accessory) ---
         ClothingItem(
-            name: "羊绒防寒围巾",
+            name: "韩系高腰百搭百褶短裙",
+            category: .bottom,
+            gender: .women,
+            visualStyle: "skirt",
+            colorHex: "#18181B",
+            minApparentTemp: 23.0,
+            maxApparentTemp: 44.0,
+            iconName: "figure.stand.dress",
+            warmthScore: 1,
+            isDefaultItem: true
+        ),
+
+        // ==========================================
+        // 5. 专属配件与鞋履 (Accessory) - 共 10 款
+        // ==========================================
+        ClothingItem(
+            name: "东北加厚防风护耳毛绒雷锋帽",
             category: .accessory,
+            gender: .unisex,
+            visualStyle: "hat",
+            colorHex: "#451A03",
+            minApparentTemp: -45.0,
+            maxApparentTemp: -8.0,
+            iconName: "snowflake",
+            warmthScore: 5,
+            isWindproof: true,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "100%纯羊绒保暖流苏大围巾",
+            category: .accessory,
+            gender: .unisex,
+            visualStyle: "scarf",
+            colorHex: "#991B1B",
             minApparentTemp: -35.0,
             maxApparentTemp: 6.0,
             iconName: "scarf.fill",
@@ -191,9 +603,25 @@ public struct WardrobeDefaults {
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "便携抗风晴雨伞",
+            name: "加厚防滑保暖雪地靴",
             category: .accessory,
-            minApparentTemp: -35.0,
+            gender: .unisex,
+            visualStyle: "boots",
+            colorHex: "#D97706",
+            minApparentTemp: -40.0,
+            maxApparentTemp: 0.0,
+            iconName: "shoeprints.fill",
+            warmthScore: 5,
+            isWaterproof: true,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "便携黑胶超强抗风晴雨伞",
+            category: .accessory,
+            gender: .unisex,
+            visualStyle: "umbrella",
+            colorHex: "#1D4ED8",
+            minApparentTemp: -40.0,
             maxApparentTemp: 45.0,
             iconName: "umbrella.fill",
             warmthScore: 1,
@@ -201,11 +629,26 @@ public struct WardrobeDefaults {
             isDefaultItem: true
         ),
         ClothingItem(
-            name: "遮阳防晒棒球帽",
+            name: "美式复古刺绣防晒棒球帽",
             category: .accessory,
-            minApparentTemp: 22.0,
+            gender: .unisex,
+            visualStyle: "hat",
+            colorHex: "#1E293B",
+            minApparentTemp: 18.0,
             maxApparentTemp: 45.0,
             iconName: "cap.fill",
+            warmthScore: 1,
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "法式度假大檐草编遮阳帽",
+            category: .accessory,
+            gender: .women,
+            visualStyle: "hat",
+            colorHex: "#FEF08A",
+            minApparentTemp: 24.0,
+            maxApparentTemp: 45.0,
+            iconName: "sun.max.fill",
             warmthScore: 1,
             isDefaultItem: true
         )

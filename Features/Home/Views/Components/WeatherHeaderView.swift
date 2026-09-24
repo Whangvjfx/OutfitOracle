@@ -1,57 +1,69 @@
 import SwiftUI
 
-/// 首页顶部天气概况与温差看板
+/// 首页顶部天气概况与温差看板（支持点击切换全国城市）
 public struct WeatherHeaderView: View {
     public let cityName: String
     public let weather: WeatherSnapshot?
     public let isLoading: Bool
     public let onRefresh: () -> Void
+    public let onTapCity: () -> Void
 
     public init(
         cityName: String,
         weather: WeatherSnapshot?,
         isLoading: Bool,
-        onRefresh: @escaping () -> Void
+        onRefresh: @escaping () -> Void,
+        onTapCity: @escaping () -> Void
     ) {
         self.cityName = cityName
         self.weather = weather
         self.isLoading = isLoading
         self.onRefresh = onRefresh
+        self.onTapCity = onTapCity
     }
 
     public var body: some View {
         VStack(spacing: 14) {
-            // 顶栏：城市与日期 + 刷新按钮
+            // 顶栏：城市点击切换与日期 + 刷新按钮
             HStack(alignment: .center) {
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 5) {
-                        Image(systemName: "location.fill")
+                Button(action: onTapCity) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "mappin.and.ellipse")
                             .font(.subheadline)
                             .foregroundStyle(.blue)
+
                         Text(cityName)
                             .font(.title3)
                             .fontWeight(.bold)
-                    }
+                            .foregroundStyle(.primary)
 
-                    Text(formattedDate())
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        Image(systemName: "chevron.down.circle.fill")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
+                .buttonStyle(.plain)
 
                 Spacer()
 
-                Button(action: onRefresh) {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.body)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.primary)
-                        .rotationEffect(.degrees(isLoading ? 360 : 0))
-                        .animation(isLoading ? .linear(duration: 1).repeatForever(autoreverses: false) : .default, value: isLoading)
-                        .padding(8)
-                        .background(Color(uiColor: .tertiarySystemFill))
-                        .clipShape(Circle())
+                HStack(spacing: 8) {
+                    Text(formattedDate())
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    Button(action: onRefresh) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.primary)
+                            .rotationEffect(.degrees(isLoading ? 360 : 0))
+                            .animation(isLoading ? .linear(duration: 1).repeatForever(autoreverses: false) : .default, value: isLoading)
+                            .padding(7)
+                            .background(Color(uiColor: .tertiarySystemFill))
+                            .clipShape(Circle())
+                    }
+                    .disabled(isLoading)
                 }
-                .disabled(isLoading)
             }
 
             if let w = weather {

@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 
 /// 针对个人开发者/脱壳/无苹果开发者账号的 100% 免费实时天气服务（无需任何 API Key，全球可用）
-/// 数据源：Open-Meteo (开源气象数据，支持体感温度、日温差、降水概率)
+/// 数据源：Open-Meteo (开源气象数据，支持体感温度、日温差、降水概率、24小时逐小时预报)
 public final class OpenMeteoWeatherService: WeatherProvider {
     
     public init() {}
@@ -11,7 +11,7 @@ public final class OpenMeteoWeatherService: WeatherProvider {
         let lat = location.coordinate.latitude
         let lon = location.coordinate.longitude
         
-        let urlString = "https://api.open-meteo.com/v1/forecast?latitude=\(lat)&longitude=\(lon)&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto"
+        let urlString = "https://api.open-meteo.com/v1/forecast?latitude=\(lat)&longitude=\(lon)&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&hourly=temperature_2m,apparent_temperature,precipitation_probability,weather_code&timezone=auto"
         
         guard let url = URL(string: urlString) else {
             throw URLError(.badURL)
@@ -27,6 +27,7 @@ public final class OpenMeteoWeatherService: WeatherProvider {
         
         let current = decoded.current
         let daily = decoded.daily
+        let hourly = decoded.hourly
 
         let temp = current.temperature_2m
         let apparentTemp = current.apparent_temperature
@@ -40,6 +41,43 @@ public final class OpenMeteoWeatherService: WeatherProvider {
         let wmoCode = current.weather_code
         let (desc, symbol) = parseWMOCode(wmoCode)
 
+        // 解析未来 24 小时逐小时数据
+        var parsedHourly: [HourlyWeather] = []
+        let currentHour = Calendar.current.component(.hour, from: Date())
+        let totalCount = min(hourly.time.count, hourly.temperature_2m.count, hourly.apparent_temperature.count)
+        
+        // 找到最接近当前小时的索引并提取后续 24 小时
+        let startIndex = min(currentHour, max(0, totalCount - 24))
+        let endIndex = min(startIndex + 24, totalCount)
+
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withFullDate, .withTime, .withDashInDate, .withColonInTime]
+
+        for i in startIndex..<endIndex {
+            let timeStr = hourly.time[i]
+            let date = isoFormatter.date(from: timeStr) ?? Date().addingTimeInterval(Double(i - startIndex) * 3600)
+            let hourInt = Calendar.current.component(.hour, from: date)
+            let displayHour = String(format: "%02d:00", hourInt)
+            
+            let hTemp = hourly.temperature_2m[i]
+            let hApparent = hourly.apparent_temperature[i]
+            let hPrecip = Double(hourly.precipitation_probability[safe: i] ?? 0) / 100.0
+            let hCode = hourly.weather_code[safe: i] ?? 0
+            let (hDesc, hSymbol) = parseWMOCode(hCode)
+
+            parsedHourly.append(
+                HourlyWeather(
+                    time: date,
+                    hourString: displayHour,
+                    temperature: hTemp,
+                    apparentTemperature: hApparent,
+                    symbolName: hSymbol,
+                    conditionDescription: hDesc,
+                    precipitationChance: hPrecip
+                )
+            )
+        }
+
         return WeatherSnapshot(
             temperature: temp,
             apparentTemperature: apparentTemp,
@@ -50,6 +88,7 @@ public final class OpenMeteoWeatherService: WeatherProvider {
             windSpeed: windSpeed,
             conditionDescription: desc,
             symbolName: symbol,
+            hourlyList: parsedHourly,
             updatedAt: Date()
         )
     }
@@ -92,6 +131,7 @@ public final class OpenMeteoWeatherService: WeatherProvider {
 private struct OpenMeteoResponse: Decodable {
     let current: CurrentWeatherDTO
     let daily: DailyWeatherDTO
+    let hourly: HourlyWeatherDTO
 }
 
 private struct CurrentWeatherDTO: Decodable {
@@ -108,4 +148,18 @@ private struct DailyWeatherDTO: Decodable {
     let temperature_2m_min: [Double]
     let precipitation_probability_max: [Int]
     let weather_code: [Int]
+}
+
+private struct HourlyWeatherDTO: Decodable {
+    let time: [String]
+    let temperature_2m: [Double]
+    let apparent_temperature: [Double]
+    let precipitation_probability: [Int]
+    let weather_code: [Int]
+}
+
+private extension Array {
+    subscript(safe index: Index) -> Element? {
+        indices.contains(index) ? self[index] : nil
+    }
 }

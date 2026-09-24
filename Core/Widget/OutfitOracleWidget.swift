@@ -28,6 +28,7 @@ public struct OutfitTimelineProvider: TimelineProvider {
                 let plan = engine.generateOutfit(
                     for: weather,
                     preference: .neutral,
+                    gender: .unisex,
                     wardrobe: WardrobeDefaults.initialItems,
                     shuffleSeed: 0
                 )
