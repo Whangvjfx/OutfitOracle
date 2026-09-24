@@ -50,12 +50,13 @@ public final class OpenMeteoWeatherService: WeatherProvider {
         let startIndex = min(currentHour, max(0, totalCount - 24))
         let endIndex = min(startIndex + 24, totalCount)
 
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withFullDate, .withTime, .withDashInDate, .withColonInTime]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 
         for i in startIndex..<endIndex {
             let timeStr = hourly.time[i]
-            let date = isoFormatter.date(from: timeStr) ?? Date().addingTimeInterval(Double(i - startIndex) * 3600)
+            let date = dateFormatter.date(from: timeStr) ?? Date().addingTimeInterval(Double(i - startIndex) * 3600)
             let hourInt = Calendar.current.component(.hour, from: date)
             let displayHour = String(format: "%02d:00", hourInt)
             
