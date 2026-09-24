@@ -16,6 +16,8 @@ public final class ClothingItem {
     public var warmthScore: Int          // 保暖度评分 (1 ~ 5)
     public var isWaterproof: Bool        // 是否防水/抗雨
     public var isWindproof: Bool         // 是否防风
+    public var customCode: String        // 用户专属私服编号 (如 "66_38", "79_38")
+    public var brand: String             // 品牌 (杉杉, Adidas, HLA, Skechers 等)
     public var isDefaultItem: Bool       // 是否为系统内置预置单品
     public var createdAt: Date
 
@@ -42,6 +44,8 @@ public final class ClothingItem {
         warmthScore: Int = 3,
         isWaterproof: Bool = false,
         isWindproof: Bool = false,
+        customCode: String = "",
+        brand: String = "",
         isDefaultItem: Bool = false,
         createdAt: Date = Date()
     ) {
@@ -57,6 +61,8 @@ public final class ClothingItem {
         self.warmthScore = warmthScore
         self.isWaterproof = isWaterproof
         self.isWindproof = isWindproof
+        self.customCode = customCode
+        self.brand = brand
         self.isDefaultItem = isDefaultItem
         self.createdAt = createdAt
     }

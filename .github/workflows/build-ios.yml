@@ -60,6 +60,7 @@ jobs:
         run: |
           mkdir -p Payload
           cp -r build/Build/Products/Release-iphoneos/OutfitOracle.app Payload/
+          python3 -c "import plistlib; p='Payload/OutfitOracle.app/Info.plist'; d=plistlib.load(open(p,'rb')); d['UILaunchStoryboardName']='LaunchScreen'; d['UILaunchScreen']={}; plistlib.dump(d,open(p,'wb')); print('Verified Info.plist launch screen keys:', d.get('UILaunchStoryboardName'), d.get('UILaunchScreen'))"
           zip -r OutfitOracle.ipa Payload
           ls -lh OutfitOracle.ipa
 

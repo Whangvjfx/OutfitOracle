@@ -5,6 +5,7 @@ public struct AvatarDisplayView: View {
     public let plan: OutfitPlan?
     public let weather: WeatherSnapshot?
     public let gender: GenderCategory
+    @State private var isJacketOpen: Bool = true
 
     public init(plan: OutfitPlan?, weather: WeatherSnapshot?, gender: GenderCategory = .men) {
         self.plan = plan
@@ -21,16 +22,45 @@ public struct AvatarDisplayView: View {
             RealisticAvatarView(
                 plan: plan,
                 weather: weather,
-                gender: gender
+                gender: gender,
+                isJacketOpen: isJacketOpen
             )
 
             // 图层 2: 浮动穿搭标牌标签 (优雅展示搭配各单品名称)
             if let plan = plan {
                 floatingTagsOverlay(plan: plan)
             }
+
+            // 图层 3: 外套开合切换控制药丸 (当有外套时提供交互)
+            if plan?.outer != nil {
+                VStack {
+                    Spacer()
+                    Button(action: {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+                            isJacketOpen.toggle()
+                        }
+                    }) {
+                        HStack(spacing: 5) {
+                            Image(systemName: isJacketOpen ? "rectangle.split.2x1" : "rectangle.portrait.fill")
+                                .font(.system(size: 11, weight: .bold))
+                            Text(isJacketOpen ? "外套：敞开看内搭" : "外套：拉上防风")
+                                .font(.system(size: 11, weight: .medium))
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(
+                            Capsule()
+                                .fill(.ultraThinMaterial)
+                                .shadow(color: .black.opacity(0.08), radius: 3, x: 0, y: 1)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.bottom, 6)
+                }
+            }
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 380)
+        .frame(height: 390)
         .padding(.vertical, 4)
     }
 
@@ -68,12 +98,12 @@ public struct AvatarDisplayView: View {
     private func floatingTagsOverlay(plan: OutfitPlan) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
-                tagChip(title: plan.inner.name, category: "内搭", color: .orange)
+                tagChip(title: plan.inner.name, category: "内搭", color: .orange, isCustom: !plan.inner.customCode.isEmpty)
                 if let mid = plan.midLayer {
-                    tagChip(title: mid.name, category: "中层", color: .yellow)
+                    tagChip(title: mid.name, category: "中层", color: .yellow, isCustom: !mid.customCode.isEmpty)
                 }
                 if let outer = plan.outer {
-                    tagChip(title: outer.name, category: "外套", color: .blue)
+                    tagChip(title: outer.name, category: "外套", color: .blue, isCustom: !outer.customCode.isEmpty)
                 }
                 Spacer()
             }
@@ -83,9 +113,9 @@ public struct AvatarDisplayView: View {
             Spacer()
 
             VStack(alignment: .trailing, spacing: 8) {
-                tagChip(title: plan.bottom.name, category: "下装", color: .indigo)
+                tagChip(title: plan.bottom.name, category: "下装", color: .indigo, isCustom: !plan.bottom.customCode.isEmpty)
                 if let acc = plan.accessory {
-                    tagChip(title: acc.name, category: "配件", color: .purple)
+                    tagChip(title: acc.name, category: "配件", color: .purple, isCustom: !acc.customCode.isEmpty)
                 }
                 Spacer()
             }
@@ -94,11 +124,22 @@ public struct AvatarDisplayView: View {
         }
     }
 
-    private func tagChip(title: String, category: String, color: Color) -> some View {
+    private func tagChip(title: String, category: String, color: Color, isCustom: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 1) {
-            Text(category)
-                .font(.system(size: 8.5, weight: .bold))
-                .foregroundStyle(color)
+            HStack(spacing: 3) {
+                Text(category)
+                    .font(.system(size: 8.5, weight: .bold))
+                    .foregroundStyle(color)
+                if isCustom {
+                    Text("专属私服")
+                        .font(.system(size: 7.5, weight: .semibold))
+                        .foregroundStyle(Color.orange)
+                        .padding(.horizontal, 3)
+                        .padding(.vertical, 0.5)
+                        .background(Color.orange.opacity(0.15))
+                        .clipShape(Capsule())
+                }
+            }
             Text(title)
                 .font(.system(size: 10.5, weight: .medium))
                 .foregroundStyle(.primary)

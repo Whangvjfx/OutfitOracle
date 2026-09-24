@@ -4,7 +4,267 @@ import Foundation
 public struct WardrobeDefaults {
     public static let initialItems: [ClothingItem] = [
         // ==========================================
-        // 1. 贴身内搭 (Inner) - 共 16 款
+        // 0. 用户个人实拍专属衣橱库 (18件核心私服，最高推荐权重)
+        // ==========================================
+        // [贴身内搭 / 短袖]
+        ClothingItem(
+            name: "黑色CURE艺术红框印花短T",
+            category: .inner,
+            gender: .men,
+            visualStyle: "tshirt",
+            colorHex: "#191A1E",
+            minApparentTemp: 20.0,
+            maxApparentTemp: 38.0,
+            iconName: "tshirt.fill",
+            warmthScore: 1,
+            customCode: "79_38",
+            brand: "CURE",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "黑色街头泼墨大印花短T",
+            category: .inner,
+            gender: .men,
+            visualStyle: "tshirt",
+            colorHex: "#18181A",
+            minApparentTemp: 20.0,
+            maxApparentTemp: 38.0,
+            iconName: "tshirt.fill",
+            warmthScore: 1,
+            customCode: "82_38",
+            brand: "街头潮牌",
+            isDefaultItem: true
+        ),
+
+        // [保暖中层 / 卫衣与衬衫]
+        ClothingItem(
+            name: "杉杉军绿半拉链立领长袖卫衣",
+            category: .midLayer,
+            gender: .men,
+            visualStyle: "sweater",
+            colorHex: "#4E604A",
+            minApparentTemp: 14.0,
+            maxApparentTemp: 24.0,
+            iconName: "figure.walk",
+            warmthScore: 2,
+            customCode: "66_38",
+            brand: "杉杉 (FIRS)",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "阿迪达斯浅灰圆领长袖卫衣",
+            category: .midLayer,
+            gender: .men,
+            visualStyle: "sweater",
+            colorHex: "#CED2D8",
+            minApparentTemp: 12.0,
+            maxApparentTemp: 22.0,
+            iconName: "figure.walk",
+            warmthScore: 3,
+            customCode: "68_38",
+            brand: "Adidas",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "牛仔蓝白领假两件保暖毛衣",
+            category: .midLayer,
+            gender: .men,
+            visualStyle: "sweater",
+            colorHex: "#405E7A",
+            minApparentTemp: 6.0,
+            maxApparentTemp: 18.0,
+            iconName: "person.bust",
+            warmthScore: 4,
+            customCode: "75_38",
+            brand: "商务休闲",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "纯黑白领假两件保暖毛织衫",
+            category: .midLayer,
+            gender: .men,
+            visualStyle: "sweater",
+            colorHex: "#1C1C20",
+            minApparentTemp: 6.0,
+            maxApparentTemp: 18.0,
+            iconName: "person.bust",
+            warmthScore: 4,
+            customCode: "80_38",
+            brand: "商务休闲",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "海澜之家蓝黄细格磨毛衬衫夹克",
+            category: .midLayer,
+            gender: .men,
+            visualStyle: "shirt",
+            colorHex: "#384A58",
+            minApparentTemp: 8.0,
+            maxApparentTemp: 20.0,
+            iconName: "tshirt.fill",
+            warmthScore: 4,
+            isWindproof: true,
+            customCode: "76_38",
+            brand: "海澜之家 (HLA)",
+            isDefaultItem: true
+        ),
+
+        // [防风防寒外壳]
+        ClothingItem(
+            name: "卡其拼深灰机能连帽冲锋衣",
+            category: .outer,
+            gender: .men,
+            visualStyle: "windbreaker",
+            colorHex: "#C6AA86",
+            minApparentTemp: 10.0,
+            maxApparentTemp: 20.0,
+            iconName: "wind",
+            warmthScore: 3,
+            isWaterproof: true,
+            isWindproof: true,
+            customCode: "69_38",
+            brand: "机能工装",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "纯黑立领双横拉链保暖小棉服",
+            category: .outer,
+            gender: .men,
+            visualStyle: "downJacket",
+            colorHex: "#1E1F23",
+            minApparentTemp: 4.0,
+            maxApparentTemp: 16.0,
+            iconName: "cloud.snow.fill",
+            warmthScore: 4,
+            isWindproof: true,
+            customCode: "77_38",
+            brand: "极简运动棉服",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "重磅黑色工装派克连帽大衣",
+            category: .outer,
+            gender: .men,
+            visualStyle: "coat",
+            colorHex: "#18181C",
+            minApparentTemp: -5.0,
+            maxApparentTemp: 12.0,
+            iconName: "snowflake",
+            warmthScore: 5,
+            isWaterproof: true,
+            isWindproof: true,
+            customCode: "78_38",
+            brand: "工装防寒",
+            isDefaultItem: true
+        ),
+
+        // [夏日短裤]
+        ClothingItem(
+            name: "SHOH纯黑工装多袋系带短裤",
+            category: .bottom,
+            gender: .men,
+            visualStyle: "shorts",
+            colorHex: "#191A1E",
+            minApparentTemp: 22.0,
+            maxApparentTemp: 38.0,
+            iconName: "figure.walk",
+            warmthScore: 1,
+            customCode: "67_38",
+            brand: "SHOH",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "美式复古浅卡其棉质休闲短裤",
+            category: .bottom,
+            gender: .men,
+            visualStyle: "shorts",
+            colorHex: "#D6C4AE",
+            minApparentTemp: 22.0,
+            maxApparentTemp: 38.0,
+            iconName: "figure.walk",
+            warmthScore: 1,
+            customCode: "71_38",
+            brand: "复古休闲",
+            isDefaultItem: true
+        ),
+
+        // [秋冬长裤]
+        ClothingItem(
+            name: "深灰薄款休闲垂坠抽绳长裤",
+            category: .bottom,
+            gender: .men,
+            visualStyle: "pants",
+            colorHex: "#2A2C30",
+            minApparentTemp: 14.0,
+            maxApparentTemp: 25.0,
+            iconName: "figure.walk",
+            warmthScore: 2,
+            customCode: "70_38",
+            brand: "舒适休闲",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "灰褐色工装细条纹灯芯绒长裤",
+            category: .bottom,
+            gender: .men,
+            visualStyle: "pants",
+            colorHex: "#6C645A",
+            minApparentTemp: 4.0,
+            maxApparentTemp: 18.0,
+            iconName: "figure.walk",
+            warmthScore: 4,
+            isWindproof: true,
+            customCode: "72_38",
+            brand: "机能工装",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "斯凯奇深藏青抓绒运动卫裤",
+            category: .bottom,
+            gender: .men,
+            visualStyle: "pants",
+            colorHex: "#1E293B",
+            minApparentTemp: 6.0,
+            maxApparentTemp: 20.0,
+            iconName: "figure.walk",
+            warmthScore: 3,
+            customCode: "73_38",
+            brand: "Skechers",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "1977高街黑白印花束脚卫裤",
+            category: .bottom,
+            gender: .men,
+            visualStyle: "pants",
+            colorHex: "#18181B",
+            minApparentTemp: 6.0,
+            maxApparentTemp: 20.0,
+            iconName: "figure.walk",
+            warmthScore: 4,
+            isWindproof: true,
+            customCode: "74_38",
+            brand: "1977",
+            isDefaultItem: true
+        ),
+        ClothingItem(
+            name: "经典深蓝宽松直筒纯棉牛仔长裤",
+            category: .bottom,
+            gender: .men,
+            visualStyle: "jeans",
+            colorHex: "#1E2E46",
+            minApparentTemp: 8.0,
+            maxApparentTemp: 25.0,
+            iconName: "figure.walk",
+            warmthScore: 3,
+            isWindproof: true,
+            customCode: "81_38",
+            brand: "经典丹宁",
+            isDefaultItem: true
+        ),
+
+        // ==========================================
+        // 1. 系统通用扩展衣橱库
         // ==========================================
         // --- 极寒/寒冷保暖打底 ---
         ClothingItem(

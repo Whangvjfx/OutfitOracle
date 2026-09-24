@@ -189,8 +189,16 @@ public final class OutfitRecommendationEngine: Sendable {
     // MARK: - 辅助筛选逻辑
 
     private func selectCandidates(category: ClothingCategory, temp: Double, gender: GenderCategory, wardrobe: [ClothingItem]) -> [ClothingItem] {
-        return wardrobe.filter { item in
+        let matched = wardrobe.filter { item in
             item.category == category && item.isSuitable(for: temp, preferredGender: gender)
+        }
+        // 用户真实私服优先推荐
+        return matched.sorted { a, b in
+            let aIsCustom = !a.customCode.isEmpty
+            let bIsCustom = !b.customCode.isEmpty
+            if aIsCustom && !bIsCustom { return true }
+            if !aIsCustom && bIsCustom { return false }
+            return a.warmthScore > b.warmthScore
         }
     }
 

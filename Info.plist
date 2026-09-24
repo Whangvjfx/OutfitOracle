@@ -17,20 +17,22 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.0</string>
+	<string>1.2.0</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>OutfitOracle 需要访问您的地理位置，以获取当地准确的实时气象与体感温度，为您智能推荐最合身的穿搭方案。</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>OutfitOracle 需要位置权限以在早晨推送与桌面小组件中更新当地温度穿搭提示。</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>UILaunchScreen</key>
+	<dict/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>OutfitOracle 需要访问您的地理位置，以获取当地准确的实时气象与体感温度，为您智能推荐最合身的穿搭方案。</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>OutfitOracle 需要位置权限以在早晨推送与桌面小组件中更新当地温度穿搭提示。</string>
 </dict>
 </plist>
